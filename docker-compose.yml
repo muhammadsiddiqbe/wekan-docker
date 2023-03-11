@@ -2,7 +2,7 @@ version: '3'
 
 services:
   wekan:
-    image: wekanteam/wekan
+    image: wekanteam/wekan:v6.78
     restart: always
     env_file:
       - .env
@@ -14,7 +14,7 @@ services:
       - MAIL_PASS=${MAIL_PASS}
       - MAIL_USER=${MAIL_USER}
     ports:
-      - "8080:80"
+      - "8080:8080"
     depends_on:
       - mongo
 
