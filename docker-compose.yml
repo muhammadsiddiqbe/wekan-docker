@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  wekan:
+    image: wekanteam/wekan
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/wekan
+      - ROOT_URL=${WEKAN_DOMAIN}
+      - MAIL_URL=smtp://smtp.gmail.com:587/
+      - MAIL_FROM=${MAIL_FROM}
+      - MAIL_PASS=${MAIL_PASS}
+      - MAIL_USER=${MAIL_USER}
+    ports:
+      - "8080:80"
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:4.2
+    restart: always
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
